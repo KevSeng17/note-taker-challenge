@@ -1,28 +1,4 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(express.json());
-app.use(express.statis('public'));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/notes.html'));
-});
-app.get('/api/notes', (req, res) => {
-  res.json([]);
-});
-app.post('/api/notes', (req, res) => {
-  res.json(req.body);
-});
-app.delete('/api/notes', (req, res) => {
-  res.json({ id: req.params.id });
-});
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+const router = require('express').Router();
 let noteForm;
 let noteTitle;
 let noteText;
@@ -217,3 +193,4 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+module.exports = router;
